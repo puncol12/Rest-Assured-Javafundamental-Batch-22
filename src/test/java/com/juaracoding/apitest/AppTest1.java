@@ -24,9 +24,7 @@ public class AppTest1 {
     @Test
     public void getListGroup() {
 
-        RestAssured.given().header(
-                "Authorization",
-                "Token bb25b29c69616918e77620148a1d01dcbeeb7a56")
+        RestAssured.given().header("Authorization", "Token bb25b29c69616918e77620148a1d01dcbeeb7a56")
                 .get("/catalogs/groups/")
                 .then()
                 .statusCode(200)
