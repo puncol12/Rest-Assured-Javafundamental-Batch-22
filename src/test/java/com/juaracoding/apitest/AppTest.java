@@ -1,33 +1,112 @@
 package com.juaracoding.apitest;
 
-import org.testng.Assert;
+import org.hamcrest.CoreMatchers;
+import org.json.JSONObject;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 
 public class AppTest {
 
     RequestSpecification requestSpecification;
     Response response;
+    ValidatableResponse validatableResponse;
+    private int id;
 
-    @Test
-    public void stepTest01() {
+    @BeforeClass
+    public void setup() {
         RestAssured.baseURI = "http://localhost:8000";
-
-        requestSpecification = RestAssured.given();
-        requestSpecification.header(
-                "Authorization",
-                "Token bb25b29c69616918e77620148a1d01dcbeeb7a56");
-
-        response = requestSpecification.get("catalogs/groups/");
-        String statusLine = response.statusLine();
-        int statusCode = response.statusCode();
-
-        Assert.assertEquals(statusLine, "HTTP/1.1 200 OK");
-        Assert.assertEquals(statusCode, 200);
-        response.prettyPrint();
     }
 
+    @Test
+    public void getListGroup() {
+        RestAssured.given().header(
+                "Authorization",
+                "Token bb25b29c69616918e77620148a1d01dcbeeb7a56")
+                .get("/catalogs/groups/")
+                .then()
+                .statusCode(200)
+                .statusLine("HTTP/1.1 200 OK")
+                .body("count", CoreMatchers.instanceOf(Integer.class))
+                .body("next", CoreMatchers.anyOf(CoreMatchers.nullValue(), CoreMatchers.instanceOf(String.class)));
+    }
+
+    @Test(dependsOnMethods = "getListGroup")
+    public void createGroup() {
+        JSONObject payload = new JSONObject();
+        payload.put("title", "Mobil Dinas Java");
+        payload.put("origin", "Pemkot DKI Javarta");
+
+        Response response = RestAssured
+                .given()
+                .header(
+                        "Authorization",
+                        "Token bb25b29c69616918e77620148a1d01dcbeeb7a56")
+                .contentType(ContentType.JSON)
+                .body(payload.toString())
+                .when()
+                .post("/catalogs/groups/");
+
+        id = response.jsonPath().getInt("id");
+
+        response.then()
+                .statusCode(201)
+                .statusLine("HTTP/1.1 201 Created")
+                .body("id", CoreMatchers.instanceOf(Integer.class))
+                .body("title", CoreMatchers.instanceOf(String.class))
+                .body("origin", CoreMatchers.instanceOf(String.class))
+                .body("created_at", CoreMatchers.instanceOf(String.class))
+                .body("updated_at", CoreMatchers.instanceOf(String.class))
+                .body("owner", CoreMatchers.instanceOf(Integer.class));
+    }
+
+    @Test(dependsOnMethods = "createGroup")
+    public void updateGroup() {
+        JSONObject payload = new JSONObject();
+        payload.put("title", "Truk Java");
+        payload.put("origin", "Pemkot DKI Javarta");
+
+        RestAssured
+                .given()
+                .header(
+                        "Authorization",
+                        "Token bb25b29c69616918e77620148a1d01dcbeeb7a56")
+                .contentType(ContentType.JSON)
+                .body(payload.toString())
+                .when()
+                .put("/catalogs/groups/" + id + "/")
+                .then()
+                .statusCode(200)
+                .statusLine("HTTP/1.1 200 OK")
+                .body("id", CoreMatchers.instanceOf(Integer.class))
+                .body("title", CoreMatchers.instanceOf(String.class))
+                .body("origin", CoreMatchers.instanceOf(String.class))
+                .body("created_at", CoreMatchers.instanceOf(String.class))
+                .body("updated_at", CoreMatchers.instanceOf(String.class))
+                .body("owner", CoreMatchers.instanceOf(Integer.class));
+    }
+
+    @Test(dependsOnMethods = "updateGroup", enabled = false)
+    public void deleteGroup() {
+        JSONObject payload = new JSONObject();
+        payload.put("title", "Truk Java");
+        payload.put("origin", "Pemkot DKI Javarta");
+
+        RestAssured
+                .given()
+                .header(
+                        "Authorization",
+                        "Token bb25b29c69616918e77620148a1d01dcbeeb7a56")
+                .contentType(ContentType.JSON)
+                .when()
+                .delete("/catalogs/groups/" + id + "/")
+                .then()
+                .statusCode(204)
+                .statusLine("HTTP/1.1 204 No Content");
+    }
 }
