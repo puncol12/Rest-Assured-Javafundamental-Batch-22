@@ -8,14 +8,11 @@ import org.testng.annotations.Test;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
-import io.restassured.specification.RequestSpecification;
 
 public class AppTest {
-
-    RequestSpecification requestSpecification;
-    Response response;
-    ValidatableResponse validatableResponse;
+//     RequestSpecification requestSpecification;
+//     Response response;
+//     ValidatableResponse validatableResponse;
     private int id;
 
     @BeforeClass
@@ -27,13 +24,14 @@ public class AppTest {
     public void getListGroup() {
         RestAssured.given().header(
                 "Authorization",
-                "Token bb25b29c69616918e77620148a1d01dcbeeb7a56")
+                "Token cc5f27d68260c334ebeaa3c48c5a042142f63bea")
                 .get("/catalogs/groups/")
                 .then()
                 .statusCode(200)
                 .statusLine("HTTP/1.1 200 OK")
                 .body("count", CoreMatchers.instanceOf(Integer.class))
-                .body("next", CoreMatchers.anyOf(CoreMatchers.nullValue(), CoreMatchers.instanceOf(String.class)));
+                .body("next", CoreMatchers.anyOf(CoreMatchers.nullValue(),
+                        CoreMatchers.instanceOf(Integer.class)));
     }
 
     @Test(dependsOnMethods = "getListGroup")
@@ -46,9 +44,9 @@ public class AppTest {
                 .given()
                 .header(
                         "Authorization",
-                        "Token bb25b29c69616918e77620148a1d01dcbeeb7a56")
+                        "Token cc5f27d68260c334ebeaa3c48c5a042142f63bea")
                 .contentType(ContentType.JSON)
-                .body(payload.toString())
+
                 .when()
                 .post("/catalogs/groups/");
 
@@ -75,7 +73,7 @@ public class AppTest {
                 .given()
                 .header(
                         "Authorization",
-                        "Token bb25b29c69616918e77620148a1d01dcbeeb7a56")
+                        "Token cc5f27d68260c334ebeaa3c48c5a042142f63bea")
                 .contentType(ContentType.JSON)
                 .body(payload.toString())
                 .when()
@@ -101,7 +99,7 @@ public class AppTest {
                 .given()
                 .header(
                         "Authorization",
-                        "Token bb25b29c69616918e77620148a1d01dcbeeb7a56")
+                        "Token cc5f27d68260c334ebeaa3c48c5a042142f63bea")
                 .contentType(ContentType.JSON)
                 .when()
                 .delete("/catalogs/groups/" + id + "/")
