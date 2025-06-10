@@ -1,16 +1,18 @@
 package com.juaracoding.apitest.hooks;
 
-import io.cucumber.java.AfterAll;
-import io.cucumber.java.BeforeAll;
+import com.juaracoding.apitest.DriverSingleton;
+
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 
 public class Hook {
-  @BeforeAll
-  public static void initialize() {
-    System.out.println("BeforeAll jalan");
+  @Before
+  public void initialize() {
+    DriverSingleton.createOrGetDriver();
   }
 
-  @AfterAll
-  public static void finalTeardown() {
-    System.out.println("AfterAll jalan");
+  @After
+  public void finalTeardown() {
+    DriverSingleton.quitDriver();
   }
 }
