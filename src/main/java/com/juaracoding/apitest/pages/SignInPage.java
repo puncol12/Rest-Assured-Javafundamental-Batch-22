@@ -17,6 +17,9 @@ public class SignInPage {
   @FindBy(id = "login-button")
   WebElement loginButton;
 
+  @FindBy(xpath = "//h3[@data-test='error']")
+  WebElement errorMessage;
+
   public SignInPage(WebDriver driver) {
     this.driver = driver;
     PageFactory.initElements(driver, this);
@@ -34,12 +37,13 @@ public class SignInPage {
     loginButton.click();
   }
 
-  public void onLogin(String username, String password) throws InterruptedException {
-    Thread.sleep(2000);
+  public void login(String username, String password) {
     setUsername(username);
-    Thread.sleep(2000);
     setPassword(password);
-    Thread.sleep(2000);
     onClick();
+  }
+
+  public String getErrorMessage() {
+    return errorMessage.getText();
   }
 }
