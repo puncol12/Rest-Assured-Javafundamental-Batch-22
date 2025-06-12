@@ -28,19 +28,18 @@ public class ProductListAddToCartSteps {
         cartPage = new CartPage(driver);
 
         signInPage.login("standard_user", "secret_sauce");
-        Thread.sleep(2000);
+        Thread.sleep(3000);
     }
 
     @When("Klik tombol Add to Cart pada salah satu produk")
     public void testStep02() throws InterruptedException {
         productListPage.getTotalButtons();
-        Thread.sleep(2000);
     }
 
     @Then("Klik ikon keranjang")
     public void testStep03() throws InterruptedException {
         cartPage.clickCartIcon();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
     }
 
 }
