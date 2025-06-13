@@ -24,6 +24,9 @@ public class ProductListPage {
     @FindBy(xpath = "//div[@class='btn_primary btn_inventory']")
     List<WebElement> buttonAddToCart;
 
+    @FindBy(xpath = "//*[@id=\"inventory_container\"]/div/div[1]/div[3]/button")
+    WebElement buttonIconAddToCart;
+
     public ProductListPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -39,6 +42,10 @@ public class ProductListPage {
 
     public int getTotalButtons() {
         return buttonAddToCart.size();
+    }
+
+    public void clickAddToCart() {
+        buttonIconAddToCart.click();
     }
 
     public boolean hasAProducts() {

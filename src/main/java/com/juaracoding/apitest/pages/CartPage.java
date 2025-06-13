@@ -8,8 +8,11 @@ import org.openqa.selenium.support.PageFactory;
 public class CartPage {
     public final WebDriver driver;
 
-    @FindBy(xpath = "//*[@id=\"inventory_container\"]/div/div[1]/div[3]/button")
-    WebElement buttonAddToCart;
+    @FindBy(xpath = "//*[@id=\"shopping_cart_container\"]/a")
+    WebElement cartIcon;
+
+    @FindBy(xpath = "//a[@class='btn_action checkout_button']")
+    WebElement checkoutButton;
 
     public CartPage(WebDriver driver) {
         this.driver = driver;
@@ -17,6 +20,10 @@ public class CartPage {
     }
 
     public void clickCartIcon() {
-        buttonAddToCart.click();
+        cartIcon.click();
+    }
+
+    public void clickCheckout() {
+        checkoutButton.click();
     }
 }
