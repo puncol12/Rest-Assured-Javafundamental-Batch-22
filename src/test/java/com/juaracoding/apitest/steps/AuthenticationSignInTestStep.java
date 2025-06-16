@@ -2,6 +2,7 @@ package com.juaracoding.apitest.steps;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+
 import com.juaracoding.apitest.DriverSingleton;
 import com.juaracoding.apitest.pages.SignInPage;
 

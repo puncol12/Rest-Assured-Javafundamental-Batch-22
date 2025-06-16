@@ -21,6 +21,12 @@ public class CheckoutPage {
     @FindBy(xpath = "//*[@id=\"checkout_info_container\"]/div/form/div[2]/input")
     WebElement continueButton;
 
+    @FindBy(xpath = "//a[@class='btn_action cart_button']")
+    WebElement finishButton;
+
+    @FindBy(xpath = "//h2[@class='complete-header']")
+    WebElement thankYouMessage;
+    
     public CheckoutPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -34,5 +40,13 @@ public class CheckoutPage {
 
     public void clickContinue() {
         continueButton.click();
+    }
+
+    public void clickFinish() {
+        finishButton.click();
+    }
+
+    public String getMessage() {
+        return thankYouMessage.getText();
     }
 }

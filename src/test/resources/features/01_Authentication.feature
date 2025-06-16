@@ -11,6 +11,11 @@ Feature: Authentication feature test
       | username      | password     |
       | standard_user | secret_sauce |
 
+  Scenario: Logout dari sistem
+    Given Klik ikon menu
+    When Klik Logout
+    Then Pengguna diarahkan kembali ke halaman login
+
   Scenario Outline: Login dengan kredensial yang tidak valid
     Given buka halaman login untuk pengujian tidak valid
     When Masukkan username "<username>" dan password "<password>" tidak valid
@@ -18,5 +23,5 @@ Feature: Authentication feature test
     Then muncul pesan error login gagal
 
     Examples:
-      | username      | password     |
+      | username      | password      |
       | standard_user | standard_user |

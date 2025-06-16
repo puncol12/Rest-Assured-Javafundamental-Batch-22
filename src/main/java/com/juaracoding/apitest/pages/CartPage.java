@@ -11,7 +11,7 @@ public class CartPage {
     @FindBy(xpath = "//*[@id=\"shopping_cart_container\"]/a")
     WebElement cartIcon;
 
-    @FindBy(xpath = "//a[@class='btn_action checkout_button']")
+    @FindBy(xpath = "//*[@id=\"cart_contents_container\"]/div/div[2]/a[2]")
     WebElement checkoutButton;
 
     public CartPage(WebDriver driver) {
