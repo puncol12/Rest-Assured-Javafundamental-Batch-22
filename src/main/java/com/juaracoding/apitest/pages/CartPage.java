@@ -16,7 +16,12 @@ public class CartPage {
 
     public CartPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+    }
+
+    public static CartPage init(WebDriver driver) {
+        CartPage cartPage = new CartPage(driver);
+        PageFactory.initElements(driver, cartPage);
+        return cartPage;
     }
 
     public void clickCartIcon() {

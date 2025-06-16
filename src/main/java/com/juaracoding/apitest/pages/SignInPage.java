@@ -22,7 +22,12 @@ public class SignInPage {
 
   public SignInPage(WebDriver driver) {
     this.driver = driver;
-    PageFactory.initElements(driver, this);
+  }
+
+  public static SignInPage init(WebDriver driver) {
+    SignInPage signInPage = new SignInPage(driver);
+    PageFactory.initElements(driver, signInPage);
+    return signInPage;
   }
 
   public void setUsername(String value) {

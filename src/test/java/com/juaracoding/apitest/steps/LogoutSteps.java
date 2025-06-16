@@ -18,7 +18,7 @@ public class LogoutSteps {
     @Given("Klik ikon menu")
     public void testStep01() throws InterruptedException {
         driver = DriverSingleton.createOrGetDriver();
-        menuPage = new MenuPage(driver);
+        menuPage = MenuPage.init(driver);
         menuPage.clickMenu();
         Thread.sleep(1000);
     }

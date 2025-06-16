@@ -29,7 +29,12 @@ public class CheckoutPage {
     
     public CheckoutPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+    }
+
+    public static CheckoutPage init(WebDriver driver) {
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        PageFactory.initElements(driver, checkoutPage);
+        return checkoutPage;
     }
 
     public void input(String fname, String lname, String pcode) {

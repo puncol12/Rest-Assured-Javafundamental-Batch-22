@@ -20,8 +20,8 @@ public class ProductVerificationTest {
   public void testStep01() throws InterruptedException {
     driver = DriverSingleton.createOrGetDriver();
     driver.get("https://www.saucedemo.com/v1/index.html");
-    signInPage = new SignInPage(driver);
-    productListPage = new ProductListPage(driver);
+    signInPage = SignInPage.init(driver);
+    productListPage = ProductListPage.init(driver);
 
     signInPage.login("standard_user", "secret_sauce");
     Thread.sleep(2000);

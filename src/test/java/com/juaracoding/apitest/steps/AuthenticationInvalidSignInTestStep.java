@@ -19,7 +19,7 @@ public class AuthenticationInvalidSignInTestStep {
     public void testStep01() {
       driver = DriverSingleton.createOrGetDriver();
       driver.get("https://www.saucedemo.com/v1/index.html");
-      signInPage = new SignInPage(driver);
+      signInPage = SignInPage.init(driver);
     }
   
     @When("Masukkan username {string} dan password {string} tidak valid")

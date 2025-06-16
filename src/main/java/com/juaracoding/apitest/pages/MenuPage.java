@@ -17,7 +17,12 @@ public class MenuPage {
 
     public MenuPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
+    }
+
+    public static MenuPage init(WebDriver driver) {
+        MenuPage menuPage = new MenuPage(driver);
+        PageFactory.initElements(driver, menuPage);
+        return menuPage;
     }
 
     public void clickMenu() {

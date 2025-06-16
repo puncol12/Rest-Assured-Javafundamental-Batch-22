@@ -24,9 +24,9 @@ public class ProductListAddToCartSteps {
         driver = DriverSingleton.createOrGetDriver();
         driver.get("https://www.saucedemo.com/v1/index.html");
 
-        signInPage = new SignInPage(driver);
-        productListPage = new ProductListPage(driver);
-        cartPage = new CartPage(driver);
+        signInPage = SignInPage.init(driver);
+        productListPage = ProductListPage.init(driver);
+        cartPage = CartPage.init(driver);
 
         signInPage.login("standard_user", "secret_sauce");
         Thread.sleep(3000);
@@ -34,7 +34,7 @@ public class ProductListAddToCartSteps {
 
     @When("Klik tombol Add to Cart pada salah satu produk")
     public void testStep02() throws InterruptedException {
-        productListPage.clickAddToCart();
+        productListPage.clickAddToCart(0);
         Thread.sleep(1000);
     }
 

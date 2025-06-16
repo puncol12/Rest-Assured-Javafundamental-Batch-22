@@ -18,7 +18,7 @@ public class FinishCheckout {
     @Given("Lanjut dari ringkasan pembelian")
     public void testStep01() {
         driver = DriverSingleton.createOrGetDriver();
-        checkoutPage = new CheckoutPage(driver);
+        checkoutPage = CheckoutPage.init(driver);
     }
 
     @When("Klik tombol Finish")

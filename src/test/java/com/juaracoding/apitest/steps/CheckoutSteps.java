@@ -24,8 +24,8 @@ public class CheckoutSteps {
     public void testStep01() throws InterruptedException {
         driver = DriverSingleton.createOrGetDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        cartPage = new CartPage(driver);
-        checkoutPage = new CheckoutPage(driver);
+        cartPage = CartPage.init(driver);
+        checkoutPage = CheckoutPage.init(driver);
         Thread.sleep(1000);
         cartPage.clickCheckout();
     }

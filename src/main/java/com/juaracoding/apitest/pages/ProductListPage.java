@@ -8,9 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-/**
- * Daftar produk muncul lengkap dengan nama, harga, dan tombol Add to Cart
- */
 public class ProductListPage {
 
     public final WebDriver driver;
@@ -25,12 +22,18 @@ public class ProductListPage {
     List<WebElement> buttonAddToCart;
 
     @FindBy(xpath = "//*[@id=\"inventory_container\"]/div/div[1]/div[3]/button")
-    WebElement buttonIconAddToCart;
+    List<WebElement> buttonIconAddToCart;
 
     public ProductListPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
+
+     public static ProductListPage init(WebDriver driver) {
+        ProductListPage productListPage = new ProductListPage(driver);
+        PageFactory.initElements(driver, productListPage);
+        return productListPage;
+    }
+
 
     public int getTotalNames() {
         return inventoryItemName.size();
@@ -44,8 +47,14 @@ public class ProductListPage {
         return buttonAddToCart.size();
     }
 
-    public void clickAddToCart() {
-        buttonIconAddToCart.click();
+    public void clickAddToCart(int par) {
+        buttonIconAddToCart.get(par).click();
+    }
+
+    public void clickAllAddToCart() {
+        for (WebElement button : buttonIconAddToCart) {
+            button.click();
+        }
     }
 
     public boolean hasAProducts() {
