@@ -36,5 +36,6 @@ public class ProductVerificationTest {
   @Then("Daftar produk muncul lengkap dengan nama, harga, dan tombol Add to Cart")
   public void testStep03() {
     Assert.assertTrue(productListPage.checkProperty());
+    driver.quit();
   }
 }

@@ -41,5 +41,6 @@ public class AuthenticationInvalidSignInTestStep {
       String actual = signInPage.getErrorMessage();
       Thread.sleep(1000);
       Assert.assertEquals(actual, expected);
+      driver.quit();
   }
 }

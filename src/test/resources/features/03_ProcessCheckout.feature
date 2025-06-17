@@ -1,14 +1,17 @@
+@Tinggi
 Feature: Proses Checkout
 
   Scenario: Tambah produk ke keranjang
     Given Login dengan user valid
     When Klik tombol Add to Cart pada salah satu produk
-    Then Klik ikon keranjang
+    And Klik ikon keranjang
+    Then Produk muncul di halaman keranjang
 
   Scenario: Lanjut ke proses checkout
     Given Klik Checkout
     When Masukkan informasi pelanggan firt name "yusuf" dan last name "nur" dan postal code "123456"
-    Then Klik Continue
+    And Klik Continue
+    Then Pengguna diarahkan ke halaman ringkasan pembelian
 
   Scenario: Selesaikan proses checkout
     Given Lanjut dari ringkasan pembelian

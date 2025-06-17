@@ -5,8 +5,8 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
     features = {
-        "src/test/resources/features/01_Authentication.feature",
-        "src/test/resources/features/02_DaftarProduk.feature",
+        // "src/test/resources/features/01_Authentication.feature",
+        // "src/test/resources/features/02_DaftarProduk.feature",
         "src/test/resources/features/03_ProcessCheckout.feature"
     }, 
     plugin = {

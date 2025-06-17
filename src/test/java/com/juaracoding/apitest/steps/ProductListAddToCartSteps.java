@@ -42,9 +42,13 @@ public class ProductListAddToCartSteps {
     public void testStep03() throws InterruptedException {
         cartPage.clickCartIcon();
         Thread.sleep(3000);
+    }
+
+    @Then("Produk muncul di halaman keranjang")
+    public void testStep04() throws InterruptedException {
         String expected = "https://www.saucedemo.com/v1/cart.html";
+        Thread.sleep(1000);
         String actual = driver.getCurrentUrl();
         Assert.assertEquals(actual, expected);
     }
-
 }

@@ -9,6 +9,7 @@ import com.juaracoding.apitest.DriverSingleton;
 import com.juaracoding.apitest.pages.CartPage;
 import com.juaracoding.apitest.pages.CheckoutPage;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -36,11 +37,16 @@ public class CheckoutSteps {
         Thread.sleep(1000);
     }
 
-    @Then("Klik Continue")
+    @And("Klik Continue")
     public void testStep06() throws InterruptedException {
         checkoutPage.clickContinue();
         Thread.sleep(1000);
+    }
+
+    @Then("Pengguna diarahkan ke halaman ringkasan pembelian")
+    public void testStep03() throws InterruptedException {
         String expected = "https://www.saucedemo.com/v1/checkout-step-two.html";
+        Thread.sleep(1000);
         String actual = driver.getCurrentUrl();
         Assert.assertEquals(actual, expected);
     }
